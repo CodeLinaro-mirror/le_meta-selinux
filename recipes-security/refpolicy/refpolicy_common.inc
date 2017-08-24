@@ -29,7 +29,7 @@ FILES_${PN}-dev =+ " \
 
 DEPENDS += "checkpolicy-native policycoreutils-native m4-native"
 
-RDEPENDS-${PN}-dev =+ " \
+RDEPENDS_${PN}-dev =+ " \
         python \
 "
 
