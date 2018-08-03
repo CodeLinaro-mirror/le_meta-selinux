@@ -62,7 +62,6 @@ RDEPENDS_${BPN}-setsebool += "\
 	libselinux \
 	libsemanage \
 "
-RDEPENDS_${BPN} += "selinux-python"
 
 WARN_QA_remove = " unsafe-references-in-scripts"
 ERROR_QA_remove = " unsafe-references-in-scripts"
