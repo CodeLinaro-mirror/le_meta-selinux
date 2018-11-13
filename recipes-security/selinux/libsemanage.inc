@@ -11,11 +11,13 @@ inherit lib_package python-dir
 DEPENDS += "libsepol libselinux bzip2 python bison-native flex-native swig-native"
 DEPENDS_append_class-target += "audit"
 
-# For /usr/libexec/selinux/semanage_migrate_store
-RDEPENDS_${PN} += "python"
+PACKAGES =+ "${PN}-python"
 
-PACKAGES += "${PN}-python"
-FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
+# For /usr/libexec/selinux/semanage_migrate_store
+RDEPENDS_${PN}-python += "python"
+
+FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/* \
+                      ${libexecdir}/selinux/semanage_migrate_store"
 FILES_${PN}-dbg += "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug/*"
 
 EXTRA_OEMAKE_class-native += "DISABLE_AUDIT=y"
@@ -30,18 +32,10 @@ do_compile_append() {
             PYTHONLIBDIR='${PYLIB}'
 }
 
-do_install() {
-    oe_runmake install \
-            DESTDIR="${D}" \
-            PREFIX="${D}/${prefix}" \
-            INCLUDEDIR="${D}/${includedir}" \
-            LIBDIR="${D}/${libdir}" \
-            SHLIBDIR="${D}/${libdir}"
-
+do_install_append() {
     oe_runmake install-pywrap swigify \
-            DESTDIR=${D} \
             PYCEXT='.so' \
-            PYSITEDIR='${D}${libdir}/python${PYTHON_BASEVERSION}/site-packages' \
+            PYTHONLIBDIR='${D}${libdir}/python${PYTHON_BASEVERSION}/site-packages' \
             PYLIBVER='python${PYTHON_BASEVERSION}' \
             PYLIBDIR='${D}/${libdir}/$(PYLIBVER)'
 
