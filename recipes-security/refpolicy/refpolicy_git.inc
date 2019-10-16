@@ -3,8 +3,8 @@ PV = "2.20170805+git${SRCPV}"
 SRC_URI = "git://github.com/TresysTechnology/refpolicy.git;protocol=git;branch=master;name=refpolicy;destsuffix=refpolicy"
 SRC_URI += "git://github.com/TresysTechnology/refpolicy-contrib.git;protocol=git;branch=master;name=refpolicy-contrib;destsuffix=refpolicy/policy/modules/contrib"
 
-SRCREV_refpolicy = "${AUTOREV}"
-SRCREV_refpolicy-contrib = "${AUTOREV}"
+SRCREV_refpolicy ?= "794ed7efd0eca19d0353659a1ec9d4ef4e4b751c"
+SRCREV_refpolicy-contrib ?= "a393275a6ecb76311323726a029767a3a01e109e"
 SRCREV_FORMAT = "refpolicy.refpolicy-contrib"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/refpolicy-git:"
@@ -12,7 +12,6 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/refpolicy-git:"
 # Fix file contexts for Poky
 SRC_URI += "file://poky-fc-subs_dist.patch \
             file://poky-fc-update-alternatives_sysvinit.patch \
-            file://poky-fc-update-alternatives_sysklogd.patch \
             file://poky-fc-update-alternatives_hostname.patch \
             file://poky-fc-update-alternatives_bash.patch \
             file://poky-fc-fix-real-path_resolv.conf.patch \
@@ -35,7 +34,6 @@ SRC_URI += "file://poky-fc-subs_dist.patch \
 # Specific policy for Poky
 SRC_URI += "file://poky-policy-add-syslogd_t-to-trusted-object.patch \
             file://poky-policy-add-rules-for-var-log-symlink.patch \
-            file://poky-policy-add-rules-for-var-log-symlink-apache.patch \
             file://poky-policy-add-rules-for-var-log-symlink-audisp_remote_t.patch \
             file://poky-policy-add-rules-for-syslogd_t-symlink.patch \
             file://poky-policy-add-rules-for-var-cache-symlink.patch \
