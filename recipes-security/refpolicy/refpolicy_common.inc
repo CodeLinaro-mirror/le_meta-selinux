@@ -169,7 +169,7 @@ prepare_policy_store () {
 	done
 }
 
-rebuild_policy () {
+manage_policy () {
 	cat <<-EOF > ${D}${sysconfdir}/selinux/semanage.conf
 module-store = direct
 [setfiles]
@@ -185,10 +185,14 @@ policy-version = 31
 EOF
 
 	# Create policy store and build the policy
-	semodule -p ${D} -s ${POLICY_NAME} -n -B
+	semodule -p ${D} -s ${POLICY_NAME} -n $@
 	rm -f ${D}${sysconfdir}/selinux/semanage.conf
 	# no need to leave final dir created by semanage laying around
 	rm -rf ${D}${localstatedir}/lib/selinux/final
+}
+
+rebuild_policy () {
+	manage_policy -B
 }
 
 install_misc_files () {
