@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://${S}/COPYING;md5=393a5ca445f6965873eca0259a17f833"
 PROVIDES += "virtual/refpolicy"
 RPROVIDES_${PN} += "refpolicy"
 
+FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 # Specific config files for Poky
 SRC_URI += "file://customizable_types  \
 	    file://setrans-mls.conf  \
