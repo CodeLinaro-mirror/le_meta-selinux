@@ -71,6 +71,7 @@ FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}"
 
 CONFFILES_auditd += "${sysconfdir}/audit/audit.rules"
 RDEPENDS_auditd += "bash"
+CFLAGS += "-fcommon"
 
 do_install_append() {
 	rm -f ${D}/${libdir}/python${PYTHON_BASEVERSION}/site-packages/*.a
