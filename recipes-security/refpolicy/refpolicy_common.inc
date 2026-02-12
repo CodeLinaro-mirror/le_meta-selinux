@@ -146,7 +146,7 @@ EXTRA_OEMAKE += "NAME=${POLICY_NAME} \
 	MCS_CATS=${POLICY_MCS_CATS}"
 
 EXTRA_OEMAKE += "tc_usrbindir=${STAGING_BINDIR_NATIVE}"
-EXTRA_OEMAKE += "OUTPUT_POLICY=`${STAGING_BINDIR_NATIVE}/checkpolicy -V | cut -d' ' -f1`"
+EXTRA_OEMAKE += "OUTPUT_POLICY=31"
 EXTRA_OEMAKE += "CC='${BUILD_CC}' CFLAGS='${BUILD_CFLAGS}' PYTHON='${PYTHON}'"
 
 python __anonymous () {
@@ -218,7 +218,7 @@ path = ${STAGING_DIR_NATIVE}${sbindir_native}/sefcontext_compile
 args = \$@
 [end]
 
-policy-version = 33
+policy-version = 31
 EOF
 
 	# Create policy store and build the policy
