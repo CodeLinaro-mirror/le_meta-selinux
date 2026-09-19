@@ -1,4 +1,4 @@
-S ?= "${WORKDIR}"
+S ?= "${UNPACKDIR}"
 SECTION ?= "base"
 
 # Default is for script name to be the same as the recipe name.

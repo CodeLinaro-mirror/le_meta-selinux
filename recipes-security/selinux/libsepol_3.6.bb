@@ -11,7 +11,7 @@ require selinux_common.inc
 
 inherit lib_package
 
-S = "${WORKDIR}/git/libsepol"
+S = "${UNPACKDIR}/git/libsepol"
 
 DEPENDS = "flex-native"
 

@@ -76,7 +76,7 @@ SRC_URI += " \
         file://0056-policy-modules-system-logging-make-syslogd_runtime_t.patch \
         "
 
-S = "${WORKDIR}/refpolicy"
+S = "${UNPACKDIR}/refpolicy"
 
 CONFFILES:${PN} = "${sysconfdir}/selinux/config"
 FILES:${PN} += " \
