@@ -10,7 +10,7 @@ require selinux_common.inc
 
 DEPENDS = "libsepol"
 
-S = "${UNPACKDIR}/git/semodule-utils"
+S = "${UNPACKDIR}/${BP}/semodule-utils"
 
 PACKAGES =+ "\
         ${PN}-semodule-expand \

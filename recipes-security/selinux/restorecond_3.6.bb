@@ -18,7 +18,7 @@ EXTRA_OEMAKE = "SYSTEMDSYSTEMUNITDIR=${systemd_system_unitdir} \
                  SYSTEMDUSERUNITDIR=${systemd_user_unitdir} \
                 "
 
-S = "${UNPACKDIR}/git/restorecond"
+S = "${UNPACKDIR}/${BP}/restorecond"
 
 FILES:${PN} += "${datadir}/dbus-1/services/org.selinux.Restorecond.service \
                 ${systemd_user_unitdir}/* \

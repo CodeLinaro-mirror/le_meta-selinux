@@ -10,6 +10,6 @@ require selinux_common.inc
 
 DEPENDS = "libsepol xmlto-native"
 
-S = "${UNPACKDIR}/git/secilc"
+S = "${UNPACKDIR}/${BP}/secilc"
 
 BBCLASSEXTEND = "native"

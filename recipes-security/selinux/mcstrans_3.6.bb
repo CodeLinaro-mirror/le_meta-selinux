@@ -22,7 +22,7 @@ EXTRA_OEMAKE = "SBINDIR=${base_sbindir} \
                 SYSTEMDDIR=${systemd_unitdir} \
                "
 
-S = "${UNPACKDIR}/git/mcstrans"
+S = "${UNPACKDIR}/${BP}/mcstrans"
 
 do_install:append() {
     install -d ${D}${sbindir}
