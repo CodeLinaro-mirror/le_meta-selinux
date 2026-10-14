@@ -153,8 +153,8 @@ disable_policy_modules() {
 }
 
 do_compile() {
-    if [ -f "${WORKDIR}/modules.conf" ] ; then
-        cp -f ${WORKDIR}/modules.conf ${S}/policy/modules.conf
+    if [ -f "${UNPACKDIR}/modules.conf" ] ; then
+        cp -f ${UNPACKDIR}/modules.conf ${S}/policy/modules.conf
     fi
     oe_runmake conf
     disable_policy_modules
@@ -220,12 +220,12 @@ rebuild_policy () {
 }
 
 install_misc_files () {
-        cat ${WORKDIR}/customizable_types >> \
+        cat ${UNPACKDIR}/customizable_types >> \
         ${D}${sysconfdir}/selinux/${POLICY_NAME}/contexts/customizable_types
 
     # Install setrans.conf for mls/mcs policy
-    if [ -f ${WORKDIR}/setrans-${POLICY_TYPE}.conf ]; then
-        install -m 0644 ${WORKDIR}/setrans-${POLICY_TYPE}.conf \
+    if [ -f ${UNPACKDIR}/setrans-${POLICY_TYPE}.conf ]; then
+        install -m 0644 ${UNPACKDIR}/setrans-${POLICY_TYPE}.conf \
             ${D}${sysconfdir}/selinux/${POLICY_NAME}/setrans.conf
     fi
 
