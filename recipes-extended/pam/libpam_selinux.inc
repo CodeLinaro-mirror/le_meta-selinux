@@ -1,4 +1,4 @@
 inherit enable-selinux
 
-PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
+PACKAGECONFIG[selinux] = "-Dselinux=enabled,-Dselinux=disabled,libselinux"
 RDEPENDS:${PN}-runtime += "${@target_selinux(d, 'pam-plugin-selinux')}"
