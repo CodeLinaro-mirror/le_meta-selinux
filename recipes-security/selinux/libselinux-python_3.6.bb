@@ -19,7 +19,7 @@ SRC_URI += "\
 
 S = "${UNPACKDIR}/${BP}/libselinux"
 
-DEPENDS = "libsepol libpcre2 swig-native python3-setuptools-scm-native"
+DEPENDS = "libsepol libpcre2 swig-native python3-pip-native python3-setuptools-scm-native"
 DEPENDS:append:libc-musl = " fts"
 
 RDEPENDS:${PN} = "libselinux python3-core python3-shell"
@@ -38,6 +38,13 @@ FILES:${PN} = "${PYTHON_SITEPACKAGES_DIR}/*"
 INSANE_SKIP:${PN} = "dev-so"
 
 do_compile() {
+    sed -i \
+        -e 's/SWIG_Python_AppendOutput(\$result, list);/SWIG_Python_AppendOutput(\$result, list, 0);/' \
+        -e 's/SWIG_Python_AppendOutput(\$result, plist);/SWIG_Python_AppendOutput(\$result, plist, 0);/' \
+        ${S}/src/selinuxswig_python.i
+    rm -f ${S}/src/selinuxswig_python_wrap.c
+    rm -rf ${S}/src/build
+
     oe_runmake pywrap -j1 \
         PYLIBVER='python${PYTHON_BASEVERSION}' \
         PYINC='-I${STAGING_INCDIR}/${PYLIBVER}' \
@@ -47,9 +54,10 @@ do_compile() {
 do_install() {
     oe_runmake install-pywrap \
         DESTDIR=${D} \
-        PREFIX=${prefix}
+        PREFIX=${prefix} \
         PYLIBVER='python${PYTHON_BASEVERSION}' \
-        PYTHONLIBDIR='${PYTHON_SITEPACKAGES_DIR}'
+        PYTHONLIBDIR='${PYTHON_SITEPACKAGES_DIR}' \
+        PYTHON_SETUP_ARGS='--no-build-isolation'
 
     # Fix buildpaths issue
     sed -i -e 's,${WORKDIR},,g' \

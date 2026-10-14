@@ -34,14 +34,19 @@ FILES:${PN}-python = "${PYTHON_SITEPACKAGES_DIR}/* \
 FILES:${PN}-dbg += "${PYTHON_SITEPACKAGES_DIR}/.debug/*"
 FILES:${PN} += "${libexecdir}"
 
-do_compile:append() {
+do_compile:append:class-target() {
+    sed -i \
+        -e '/SWIG_Python_AppendOutput/ { /, 0);/! s/);$/, 0);/ }' \
+        ${S}/src/semanageswig_python.i
+    rm -f ${S}/src/semanageswig_wrap.c ${S}/src/*semanageswig_wrap.lo
+
     oe_runmake pywrap \
         PYLIBVER='python${PYTHON_BASEVERSION}' \
         PYINC='-I${STAGING_INCDIR}/${PYLIBVER}' \
         PYLIBS='-L${STAGING_LIBDIR}/${PYLIBVER} -l${PYLIBVER}'
 }
 
-do_install:append() {
+do_install:append:class-target() {
     oe_runmake install-pywrap \
         DESTDIR=${D} \
         PYCEXT='.so' \

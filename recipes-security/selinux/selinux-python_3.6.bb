@@ -16,7 +16,7 @@ SRC_URI += "file://fix-sepolicy-install-path.patch \
 
 S = "${UNPACKDIR}/${BP}/python"
 
-DEPENDS = "libsepol libselinux gettext-native python3-setuptools-scm-native"
+DEPENDS = "libsepol libselinux gettext-native python3-pip-native python3-setuptools-scm-native"
 
 RDEPENDS:${PN} = "\
         python3-core \
@@ -112,6 +112,7 @@ do_install() {
     oe_runmake DESTDIR="${D}" \
         PYLIBVER='python${PYTHON_BASEVERSION}' \
         PYTHONLIBDIR='${PYTHON_SITEPACKAGES_DIR}' \
+        PYTHON_SETUP_ARGS='--no-build-isolation' \
         install
 
     # Remove .pyc files
